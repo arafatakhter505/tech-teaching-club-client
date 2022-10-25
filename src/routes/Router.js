@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import Categoriy from "../components/pages/Categoriy";
+import CourseDetails from "../components/pages/CourseDetails";
 import Courses from "../components/pages/Courses";
 import Home from "../components/pages/Home";
 import Login from "../components/pages/Login";
@@ -35,6 +37,22 @@ const router = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
+      },
+      {
+        path: "/category/:category",
+        element: <Categoriy />,
+        loader: ({ params }) =>
+          fetch(
+            `https://tech-teaching-club-server-side.vercel.app/courses/${params.category}`
+          ),
+      },
+      {
+        path: "/course/:id",
+        element: <CourseDetails />,
+        loader: ({ params }) =>
+          fetch(
+            `https://tech-teaching-club-server-side.vercel.app/course/${params.id}`
+          ),
       },
     ],
   },
