@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { close, Logo, menu } from "../../assets";
+import { close, Logo, menu, profile } from "../../assets";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { AuthContext } from "./../../contexts/UserContext";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
   const [toggle, setToggle] = useState(false);
 
@@ -40,9 +42,22 @@ const Navbar = () => {
           {isDark ? <FaMoon /> : <FaSun />}
         </li>
         <li className="ml-6 text-lg font-semibold hover:text-sky-500">
-          <Link to={"/login"}>
-            <button className="bg-sky-500 text-white px-4 py-1">Login</button>
-          </Link>
+          {user?.uid ? (
+            <>
+              <Link to={"/profile"}>
+                <img
+                  title={user?.displayName}
+                  src={user?.photoURL ? user.photoURL : profile}
+                  className="w-[40px] rounded-full"
+                  alt="profile"
+                />
+              </Link>
+            </>
+          ) : (
+            <Link to={"/login"}>
+              <button className="bg-sky-500 text-white px-4 py-1">Login</button>
+            </Link>
+          )}
         </li>
       </ul>
 
@@ -53,11 +68,25 @@ const Navbar = () => {
         >
           {isDark ? <FaMoon /> : <FaSun />}
         </div>
-        <Link to={"/login"}>
-          <button className="bg-sky-500 text-white px-3 py-2 mr-3">
-            Login
-          </button>
-        </Link>
+        {user?.uid ? (
+          <>
+            <Link to={"/profile"}>
+              <img
+                title={user?.displayName}
+                src={user?.photoURL ? user.photoURL : profile}
+                className="w-[40px] rounded-full mr-3"
+                alt="profile img"
+              />
+            </Link>
+          </>
+        ) : (
+          <Link to={"/login"}>
+            <button className="bg-sky-500 text-white px-3 py-2 mr-3">
+              Login
+            </button>
+          </Link>
+        )}
+
         <div className="w-[20px]">
           <img
             className="cursor-pointer"

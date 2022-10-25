@@ -1,19 +1,56 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../assets";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Register = () => {
-  const { googleSignIn } = useContext(AuthContext);
+  const { googleSignIn, githubSignIn, createUser, updateUserProfile } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const handleGoogle = () => {
     googleSignIn()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
+        toast.success("Successfully Completed");
         navigate("/");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => toast.error(e.message));
+  };
+
+  const handleGithub = () => {
+    githubSignIn()
+      .then(() => {
+        toast.success("Successfully Completed");
+        navigate("/");
+      })
+      .catch((e) => toast.error(e.message));
+  };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPass = form.cpassword.value;
+
+    if (password.length < 6) {
+      toast.error("Password should be 6 characters or more.");
+    }
+    if (password !== confirmPass) {
+      toast.error("password did not match");
+      return;
+    }
+
+    createUser(email, password)
+      .then(() => {
+        updateUserProfile(name, photoURL)
+          .then(() => toast.success("Successfully Completed"))
+          .catch((e) => toast.error(e.message));
+        navigate("/");
+      })
+      .catch((e) => toast.error(e.message));
   };
 
   return (
@@ -25,7 +62,7 @@ const Register = () => {
         <h3 className="text-4xl font-bold text-sky-500 md:mt-0 mt-6 mb-6 md:text-left text-center">
           Get Started
         </h3>
-        <form>
+        <form onSubmit={handleRegister}>
           <div>
             <label htmlFor="name">Full Name</label>
             <input
@@ -101,7 +138,10 @@ const Register = () => {
           >
             Continue With Google
           </button>
-          <button className="my-2 border border-sky-500 p-2 rounded-md mx-2">
+          <button
+            onClick={handleGithub}
+            className="my-2 border border-sky-500 p-2 rounded-md mx-2"
+          >
             Continue With Github
           </button>
         </div>
