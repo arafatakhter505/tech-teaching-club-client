@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blog from "../components/pages/Blog";
 import Categoriy from "../components/pages/Categoriy";
 import Checkout from "../components/pages/Checkout";
 import CourseDetails from "../components/pages/CourseDetails";
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
           fetch(
             `https://tech-teaching-club-server-side.vercel.app/course/${params.id}`
           ),
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
     ],
   },

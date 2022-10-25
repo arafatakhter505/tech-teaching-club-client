@@ -30,10 +30,10 @@ const Navbar = () => {
           <Link to={"/courses"}>Courses</Link>
         </li>
         <li className="ml-6 text-lg font-semibold hover:text-sky-500">
-          <Link>FAQ</Link>
+          <Link to={"faq"}>FAQ</Link>
         </li>
         <li className="ml-6 text-lg font-semibold hover:text-sky-500">
-          <Link>Blog</Link>
+          <Link to={"/blog"}>Blog</Link>
         </li>
         <li
           onClick={handleTheme}
@@ -101,10 +101,10 @@ const Navbar = () => {
               <Link to={"courses"}>Courses</Link>
             </li>
             <li className="text-lg font-semibold hover:text-sky-500">
-              <Link>FAQ</Link>
+              <Link to={"/faq"}>FAQ</Link>
             </li>
             <li className="text-lg font-semibold hover:text-sky-500">
-              <Link>Blog</Link>
+              <Link to={"/blog"}>Blog</Link>
             </li>
           </ul>
         )}
