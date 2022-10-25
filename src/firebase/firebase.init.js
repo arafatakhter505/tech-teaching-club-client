@@ -1,12 +1,12 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBhgiyzM6C0VYiZpsG_EcuQbK46fIbd4PA",
-  authDomain: "techteachingclub.firebaseapp.com",
-  projectId: "techteachingclub",
-  storageBucket: "techteachingclub.appspot.com",
-  messagingSenderId: "1018434702852",
-  appId: "1:1018434702852:web:3c72ba0d0612f4d4d02f51",
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase
