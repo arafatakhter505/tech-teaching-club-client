@@ -4,6 +4,7 @@ import Categoriy from "../components/pages/Categoriy";
 import Checkout from "../components/pages/Checkout";
 import CourseDetails from "../components/pages/CourseDetails";
 import Courses from "../components/pages/Courses";
+import Error from "../components/pages/Error";
 import Home from "../components/pages/Home";
 import Login from "../components/pages/Login";
 import Profile from "../components/pages/Profile";
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "*",
+        element: <Error />,
       },
     ],
   },
