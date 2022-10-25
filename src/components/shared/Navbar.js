@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center px-[20px] md:px-[80px] py-[20px] shadow-md relative">
+    <nav className="flex justify-between items-center px-[20px] md:px-[50px] lg:px-[80px] py-[20px] shadow-md relative">
       <Link to={"/"}>
         <img
           src={Logo}
@@ -40,7 +40,9 @@ const Navbar = () => {
           {isDark ? <FaMoon /> : <FaSun />}
         </li>
         <li className="ml-6 text-lg font-semibold hover:text-sky-500">
-          <Link>Login</Link>
+          <Link>
+            <button className="bg-sky-500 text-white px-4 py-1">Login</button>
+          </Link>
         </li>
       </ul>
 
