@@ -56,8 +56,12 @@ const router = createBrowserRouter([
           ),
       },
       {
-        path: "/checkout",
+        path: "/checkout/:id",
         element: <Checkout />,
+        loader: ({ params }) =>
+          fetch(
+            `https://tech-teaching-club-server-side.vercel.app/course/${params.id}`
+          ),
       },
     ],
   },

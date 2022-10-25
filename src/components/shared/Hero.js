@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { hero } from "../../assets";
 
 const Hero = () => {
@@ -14,9 +15,11 @@ const Hero = () => {
           course in Computer Science. So that you can control the computer as
           you like.
         </p>
-        <button className="bg-sky-500 text-white px-4 py-2 rounded">
-          Get Started
-        </button>
+        <Link to={"/courses"}>
+          <button className="bg-sky-500 text-white px-4 py-2 rounded">
+            Get Started
+          </button>
+        </Link>
       </div>
       <div className="md:w-1/2">
         <img src={hero} alt="" />
