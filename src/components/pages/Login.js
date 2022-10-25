@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
 import { login } from "../../assets";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
   const { googleSignIn, githubSignIn, logIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleGoogle = () => {
     googleSignIn()
       .then(() => {
         toast.success("Successfully Completed");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((e) => toast.error(e.message));
   };
@@ -21,7 +23,7 @@ const Login = () => {
     githubSignIn()
       .then(() => {
         toast.success("Successfully Completed");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((e) => toast.error(e.message));
   };
@@ -34,7 +36,7 @@ const Login = () => {
     logIn(email, password)
       .then(() => {
         toast.success("Successfully login");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((e) => toast.error(e.message));
   };

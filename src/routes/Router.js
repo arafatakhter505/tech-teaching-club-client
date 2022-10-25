@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Courses from "../components/pages/Courses";
 import Home from "../components/pages/Home";
 import Login from "../components/pages/Login";
 import Profile from "../components/pages/Profile";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
       },
     ],
   },

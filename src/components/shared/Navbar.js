@@ -27,7 +27,7 @@ const Navbar = () => {
       </Link>
       <ul className="lg:flex items-center hidden">
         <li className="ml-6 text-lg font-semibold hover:text-sky-500">
-          <Link>Courses</Link>
+          <Link to={"/courses"}>Courses</Link>
         </li>
         <li className="ml-6 text-lg font-semibold hover:text-sky-500">
           <Link>FAQ</Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
         {toggle && (
           <ul className="absolute top-[100px] right-0 w-[100%] p-4 text-center bg-white shadow-md">
             <li className="text-lg font-semibold hover:text-sky-500">
-              <Link>Courses</Link>
+              <Link to={"courses"}>Courses</Link>
             </li>
             <li className="text-lg font-semibold hover:text-sky-500">
               <Link>FAQ</Link>
