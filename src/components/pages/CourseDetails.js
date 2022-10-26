@@ -4,13 +4,17 @@ import { jsPDF } from "jspdf";
 
 const CourseDetails = () => {
   const course = useLoaderData();
+
   const handlePDF = () => {
-    const doc = new jsPDF("p", "pt", [1200, 1600]);
-    doc.html(document.querySelector("#content"), {
-      callback(pdf) {
-        pdf.save(`${course.titel}.pdf`);
-      },
-    });
+    const lMargin = 15;
+    const rMargin = 15;
+    const pdfInMM = 210;
+    const doc = new jsPDF("p", "mm", "a4");
+    const paragraph = course.des;
+    const lines = doc.splitTextToSize(paragraph, pdfInMM - lMargin - rMargin);
+    doc.text(lMargin, 20, "Course Description:");
+    doc.text(lMargin, 40, lines);
+    doc.save(`${course.titel}.pdf`);
   };
 
   return (
