@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { login } from "../../assets";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
-  const { googleSignIn, githubSignIn, logIn } = useContext(AuthContext);
+  const { googleSignIn, githubSignIn, logIn, resetPassword } =
+    useContext(AuthContext);
+  const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -41,6 +43,12 @@ const Login = () => {
       .catch((e) => toast.error(e.message));
   };
 
+  const handleForgotPassword = () => {
+    resetPassword(userEmail)
+      .then(() => toast("Password reset email sent!"))
+      .catch((e) => toast.error(e.message));
+  };
+
   return (
     <div className="flex justify-between items-center md:flex-row flex-col-reverse lg:px-[80px] md:px-[50px] px-[20px] py-[50px] ">
       <div className="md:w-1/2 md:pr-8">
@@ -54,6 +62,7 @@ const Login = () => {
               id="email"
               name="email"
               type="email"
+              onBlur={(event) => setUserEmail(event.target.value)}
               className="block bg-sky-100 w-full px-2 py-2 rounded mt-2 mb-6 focus:outline-none"
               placeholder="Enter email"
               required
@@ -70,7 +79,9 @@ const Login = () => {
               required
             />
           </div>
-          <button>Forgot Password</button>
+          <p className="cursor-pointer" onClick={handleForgotPassword}>
+            Forgot Password
+          </p>
           <button
             className="bg-sky-500 text-white px-4 py-2 w-full my-6 rounded"
             type="submit"
